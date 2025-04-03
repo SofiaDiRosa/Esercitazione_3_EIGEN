@@ -7,6 +7,14 @@
 using namespace std;
 using namespace Eigen;
 
+// ERRORE RELATIVO
+double err_rel(const Vector2d& x) {
+	Vector2d xa(-1.0, -1.0);
+	double err_ass = (x - xa).norm();
+	double err_rel = err_ass / (xa.norm());
+	return err_rel;
+	
+}
 
 int main()
 {
@@ -20,9 +28,16 @@ int main()
 	};
 	
 	FullPivLU<Matrix2d> lu1(A1);
-	Vector2d x1 = lu1.solve(b1);
+	Vector2d x1_LU = lu1.solve(b1);
 	
-	cout << scientific << "x1 = " << x1 << endl;
+	
+	HouseholderQR<Matrix2d> qr1(A1);
+	Vector2d x1_QR = qr1.solve(b1);
+	
+	cout << scientific << setprecision(15) << "x1_LU = \n" << x1_LU << endl;
+	cout << scientific << setprecision(15) << "x1_QR = \n" << x1_QR << endl;
+	cout << scientific << setprecision(15) << "Errore Relativo del sistema 1 con PALU: " << err_rel(x1_LU) << endl;
+	cout << scientific << setprecision(15) << "Errore Relativo del sistema 1 con QR: " << err_rel(x1_QR) << endl;
 	
 	cout << "---------------------------------" << endl;
 	
@@ -36,9 +51,15 @@ int main()
 	};
 	
 	FullPivLU<Matrix2d> lu2(A2);
-	Vector2d x2 = lu2.solve(b2);
+	Vector2d x2_LU = lu2.solve(b2);
 	
-	cout << scientific << "x2 = " << x2 << endl;
+	HouseholderQR<Matrix2d> qr2(A2);
+	Vector2d x2_QR = qr2.solve(b2);
+	
+	cout << scientific << setprecision(15) << "x2_LU = \n" << x2_LU << endl;
+	cout << scientific << setprecision(15) << "x2_QR = \n" << x2_QR << endl;
+	cout << scientific << setprecision(15) << "Errore Relativo del sistema 2 con PALU: " << err_rel(x2_LU) << endl;
+	cout << scientific << setprecision(15) << "Errore Relativo del sistema 2 con QR: " << err_rel(x2_QR) << endl;
 	
 	cout << "---------------------------------" << endl;
 	
@@ -52,9 +73,15 @@ int main()
 	};
 	
 	FullPivLU<Matrix2d> lu3(A3);
-	Vector2d x3 = lu3.solve(b3);
+	Vector2d x3_LU = lu3.solve(b3);
 	
-	cout << scientific << "x3 = " << x3 << endl;
+	HouseholderQR<Matrix2d> qr3(A3);
+	Vector2d x3_QR = qr3.solve(b3);
+	
+	cout << scientific << setprecision(15) << "x3_LU = \n" << x3_LU << endl;
+	cout << scientific << setprecision(15) << "x3_QR = \n" << x3_QR << endl;
+	cout << scientific << setprecision(15) << "Errore Relativo del sistema 3 con PALU: " << err_rel(x3_LU) << endl;
+	cout << scientific << setprecision(15) << "Errore Relativo del sistema 3 con QR: " << err_rel(x3_QR) << endl;
 	
     return 0;
 }
