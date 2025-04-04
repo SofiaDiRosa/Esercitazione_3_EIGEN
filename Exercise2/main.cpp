@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include "Eigen/Eigen"
-#include <Eigen/LU>
 
 
 using namespace std;
@@ -18,6 +17,7 @@ double err_rel(const Vector2d& x) {
 
 int main()
 {
+	cout << setprecision(15) << scientific << endl;
 	// sistema 1
 	Matrix2d A1 {
 		{5.547001962252291e-01, -3.770900990025203e-02},
@@ -34,12 +34,12 @@ int main()
 	HouseholderQR<Matrix2d> qr1(A1);
 	Vector2d x1_QR = qr1.solve(b1);
 	
-	cout << scientific << setprecision(15) << "x1_LU = \n" << x1_LU << endl;
-	cout << scientific << setprecision(15) << "x1_QR = \n" << x1_QR << endl;
-	cout << scientific << setprecision(15) << "Errore Relativo del sistema 1 con PALU: " << err_rel(x1_LU) << endl;
-	cout << scientific << setprecision(15) << "Errore Relativo del sistema 1 con QR: " << err_rel(x1_QR) << endl;
+	cout << "x1_LU = [" << x1_LU << "] \n" << endl;
+	cout << "x1_QR = [" << x1_QR << "] \n" << endl;
+	cout << "Errore relativo del sistema 1 con PALU: " << err_rel(x1_LU) << endl;
+	cout << "Errore relativo del sistema 1 con QR: " << err_rel(x1_QR) << "\n" << endl;
 	
-	cout << "---------------------------------" << endl;
+	cout << "--------------------------------- \n" << endl;
 	
 	// sistema 2
 	Matrix2d A2 {
@@ -56,12 +56,12 @@ int main()
 	HouseholderQR<Matrix2d> qr2(A2);
 	Vector2d x2_QR = qr2.solve(b2);
 	
-	cout << scientific << setprecision(15) << "x2_LU = \n" << x2_LU << endl;
-	cout << scientific << setprecision(15) << "x2_QR = \n" << x2_QR << endl;
-	cout << scientific << setprecision(15) << "Errore Relativo del sistema 2 con PALU: " << err_rel(x2_LU) << endl;
-	cout << scientific << setprecision(15) << "Errore Relativo del sistema 2 con QR: " << err_rel(x2_QR) << endl;
+	cout << "x2_LU = [" << x2_LU << "] \n" << endl;
+	cout << "x2_QR = [" << x2_QR << "] \n" << endl;
+	cout << "Errore relativo del sistema 2 con PALU: " << err_rel(x2_LU) << endl;
+	cout << "Errore relativo del sistema 2 con QR: " << err_rel(x2_QR) << "\n" << endl;
 	
-	cout << "---------------------------------" << endl;
+	cout << "--------------------------------- \n" << endl;
 	
 	// sistema 3
 	Matrix2d A3 {
@@ -78,10 +78,10 @@ int main()
 	HouseholderQR<Matrix2d> qr3(A3);
 	Vector2d x3_QR = qr3.solve(b3);
 	
-	cout << scientific << setprecision(15) << "x3_LU = \n" << x3_LU << endl;
-	cout << scientific << setprecision(15) << "x3_QR = \n" << x3_QR << endl;
-	cout << scientific << setprecision(15) << "Errore Relativo del sistema 3 con PALU: " << err_rel(x3_LU) << endl;
-	cout << scientific << setprecision(15) << "Errore Relativo del sistema 3 con QR: " << err_rel(x3_QR) << endl;
+	cout << "x3_LU = [" << x3_LU << "] \n" << endl;
+	cout << "x3_QR = [" << x3_QR << "] \n" << endl;
+	cout << "Errore relativo del sistema 3 con PALU: " << err_rel(x3_LU) << endl;
+	cout << "Errore relativo del sistema 3 con QR: " << err_rel(x3_QR) << endl;
 	
     return 0;
 }
